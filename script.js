@@ -87,21 +87,50 @@ const restaurantMenus = {
 const allRestaurants = [
   {
     name: "Aswins Veg Restaurant",
-    category: ["Idli", "Dosa"],
+    category: ["Idli", "Dosa", "Veg Meals"],
     image: "https://th.bing.com/th?q=Restaurant+Veg+Food+Images+HD"
   },
   {
     name: "Shri Sangeethas",
-    category: ["Idli", "Dosa"],
+    category: ["Idli", "Dosa", "Pongal"],
     image: "https://th.bing.com/th?q=Restaurant+Veg+Food+Plate+Image"
   },
   {
     name: "Hotel Sai Karthik",
-    category: ["Biryani", "Parotta"],
+    category: ["Biryani", "Non Veg meals", "Chicken Fried Rice"],
     image: "https://th.bing.com/th?q=Restaurant+Veg+Food+Items"
+  },
+  {
+    name: "The Arabian Restaurant",
+    category: ["Biryani", "Grill Chicken"],
+    image: "https://th.bing.com/th/id/OIP.J5tWleD-7kRN-_NimQPbxwHaFj"
+  },
+  {
+    name: "Roshan",
+    category: ["Veg Meals", "Poori"],
+    image: "https://th.bing.com/th/id/OIP.2spTRK9gegmJatYuB1ua7wHaE7"
+  },
+  {
+    name: "Green Leaf",
+    category: ["Veg Meals", "Starters"],
+    image: "https://th.bing.com/th/id/OIP.wBu0Xsb774mtzvjhq1C3DgHaE8"
+  },
+  {
+    name: "That Mallu Joint",
+    category: ["Non Veg meals", "Biryani"],
+    image: "https://th.bing.com/th/id/OIP.QA_ruGwt8BcK2DD6zgCqIwHaE0"
+  },
+  {
+    name: "Geetham",
+    category: ["Idli", "Dosa"],
+    image: "https://th.bing.com/th/id/OIP.OBp42aXmaezC7tNSf4z6WgHaF7"
+  },
+  {
+    name: "The Copper Kitchen",
+    category: ["Grill Chicken", "Starters"],
+    image: "https://th.bing.com/th/id/OIP.7M2rlnafdHqu8mKnPJrDrAHaGS"
   }
 ];
-
 function filterByCategory(category) {
   const container = document.getElementById("restaurantList");
   if (!container) return;
@@ -109,8 +138,13 @@ function filterByCategory(category) {
   container.innerHTML = "";
 
   const filtered = allRestaurants.filter(r =>
-    r.category.includes(category)
+    r.category.some(cat => cat.toLowerCase() === category.toLowerCase())
   );
+
+  if (filtered.length === 0) {
+    container.innerHTML = "<h3 style='padding:20px'>No restaurants found</h3>";
+    return;
+  }
 
   filtered.forEach(r => {
     container.innerHTML += `
@@ -124,7 +158,6 @@ function filterByCategory(category) {
     `;
   });
 }
-
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function addToCart(name, price) {
