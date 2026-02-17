@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Foodie</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="header">
+  <h2 id="restaurantTitle"></h2>
+</header>
+
+<section class="restaurants" id="menuContainer"></section>
+
+<nav class="bottom-nav">
+  <a href="index.html" class="nav-item">
+    <span>🚚</span>
+    <p>Delivery</p>
+  </a>
+  <a href="dining.html" class="nav-item">
+    <span>🍽</span>
+    <p>Dining</p>
+  </a>
+  <a href="cart.html" class="nav-item">
+    <span>🛒</span>
+    <p>Cart (<span id="cartCount">0</span>)</p>
+  </a>
+</nav>
+
+<script src="script.js"></script>
+<script>
+const params = new URLSearchParams(window.location.search);
+const name = params.get("name");
+document.getElementById("restaurantTitle").innerText = name;
+
+const menu = restaurantMenus[name] || [];
+const container = document.getElementById("menuContainer");
+
+menu.forEach(item => {
+  container.innerHTML += `
+    <div class="card">
+      <img src="${item.image}" class="card-img" />
+      <div class="card-content">
+        <h3>${item.name}</h3>
+        <p>₹${item.price}</p>
+        <button onclick="addToCart('${item.name}', ${item.price})">
+          Add
+        </button>
+      </div>
+    </div>
+  `;
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cart</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body onload="loadCartPage()">
+
+<header class="header">
+  <h2>Your Cart</h2>
+</header>
+
+<section class="restaurants" id="cartItems"></section>
+
+<h2 style="padding:15px;">
+  Total: <span id="totalPrice">₹0</span>
+</h2>
+
+<nav class="bottom-nav">
+  <a href="index.html" class="nav-item">🚚 Delivery</a>
+  <a href="dining.html" class="nav-item">🍽 Dining</a>
+  <a href="cart.html" class="nav-item active">🛒 Cart</a>
+</nav>
+
+<script src="script.js"></script>
+</body>
+</html>
